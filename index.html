@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Randomeer - AI-Powered Idea Generator</title>
+  <meta name="description" content="Instantly generate random creative ideas powered by AI. Spark your creativity with Randomeer!" />
+  <style>
+    :root {
+      --color-primary: #6b46c1;
+      --color-primary-dark: #553c9a;
+      --color-bg: #f9fafb;
+      --color-text: #2d3748;
+      --color-accent: #d6bcfa;
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: var(--color-primary);
+      color: white;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 1.5px;
+    }
+    main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-primary-dark);
+    }
+    p.subtitle {
+      font-size: 1.2rem;
+      color: #4a5568;
+      margin-bottom: 2rem;
+    }
+    button#generateBtn {
+      background-color: var(--color-primary);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1.1rem;
+      border-radius: 0.375rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-bottom: 1.5rem;
+    }
+    button#generateBtn:hover {
+      background-color: var(--color-primary-dark);
+    }
+    section#ideaDisplay {
+      min-height: 100px;
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--color-primary-dark);
+      margin-bottom: 3rem;
+      padding: 1rem 1.5rem;
+      border: 2px dashed var(--color-accent);
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+    }
+    form#contactForm {
+      width: 100%;
+      max-width: 450px;
+      background: white;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgb(0 0 0 / 0.1);
+    }
+    form#contactForm label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--color-primary-dark);
+    }
+    form#contactForm input[type=email] {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border: 2px solid #cbd5e0;
+      border-radius: 0.375rem;
+      margin-bottom: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    form#contactForm input[type=email]:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 5px var(--color-primary);
+    }
+    form#contactForm button {
+      background-color: var(--color-primary);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1.1rem;
+      border-radius: 0.375rem;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+    form#contactForm button:hover {
+      background-color: var(--color-primary-dark);
+    }
+    .form-message {
+      color: var(--color-primary-dark);
+      font-weight: 600;
+      margin-top: 0.5rem;
+      min-height: 1.2rem;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem 1rem;
+      font-size: 0.9rem;
+      color: #718096;
+      border-top: 1px solid #e2e8f0;
+      margin-top: auto;
+    }
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+      button#generateBtn {
+        font-size: 1rem;
+      }
+      form#contactForm {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>Randomeer</header>
+  <main>
+    <h1>AI-Powered Random Idea Generator</h1>
+    <p class="subtitle">Instantly spark your creativity with unique, random ideas generated just for you.</p>
+    <button id="generateBtn">Generate Idea</button>
+    <section id="ideaDisplay">Click &ldquo;Generate Idea&rdquo; above to get started!</section>
+
+    <form id="contactForm" novalidate>
+      <label for="email">Stay updated! Enter your email:</label>
+      <input type="email" id="email" name="email" placeholder="you@example.com" required />
+      <button type="submit">Subscribe</button>
+      <div class="form-message" aria-live="polite"></div>
+    </form>
+  </main>
+  <footer>© 2024 Randomeer. All rights reserved. Contact: <a href="mailto:raphael@baget.ai">raphael@baget.ai</a></footer>
+
+  <script>
+    const ideas = [
+      "Create an AI assistant that generates personalized poetry.",
+      "Design a platform for virtual creative brainstorming sessions.",
+      "Develop an app that turns doodles into digital art.",
+      "Build a tool that suggests color palettes based on mood.",
+      "Launch a service for instant collaborative story writing.",
+      "Create a marketplace for unique handcrafted digital assets.",
+      "Develop an AI-powered logo design generator.",
+      "Invent a wearable that inspires creativity with daily prompts.",
+      "Build a gamified creativity challenge app.",
+      "Design a tool that generates random startup ideas.",
+      "Create an AI-driven music mood composer.",
+      "Develop a platform for sharing and rating creative concepts.",
+      "Launch a virtual reality ideation environment.",
+      "Design a chatbot that helps brainstorm marketing campaigns.",
+      "Create a web app that generates writing prompts instantly.",
+      "Build an AI tool that converts sketches to prototypes.",
+      "Develop a crowdsourced idea validation platform.",
+      "Invent an AI-powered creative brief generator.",
+      "Design a tool that matches creatives for project collaboration.",
+      "Build an app that randomizes daily creative exercises."
+    ];
+
+    const generateBtn = document.getElementById('generateBtn');
+    const ideaDisplay = document.getElementById('ideaDisplay');
+    const form = document.getElementById('contactForm');
+    const emailInput = document.getElementById('email');
+    const formMessage = form.querySelector('.form-message');
+
+    generateBtn.addEventListener('click', () => {
+      const randomIndex = Math.floor(Math.random() * ideas.length);
+      ideaDisplay.textContent = ideas[randomIndex];
+      trackEvent('idea_generated', { idea: ideas[randomIndex] });
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      formMessage.textContent = '';
+
+      const email = emailInput.value.trim();
+      if (!validateEmail(email)) {
+        formMessage.textContent = 'Please enter a valid email address.';
+        formMessage.style.color = 'red';
+        return;
+      }
+
+      // Simulate backend subscription API call
+      setTimeout(() => {
+        formMessage.textContent = 'Thank you for subscribing!';
+        formMessage.style.color = 'var(--color-primary-dark)';
+        emailInput.value = '';
+        trackEvent('email_subscribed', { email });
+      }, 500);
+    });
+
+    function validateEmail(email) {
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(\".+\"))@(([^<>()[\]\\.,;:\s@"]+\.)+[^<>()[\]\\.,;:\s@"]{2,})$/i;
+      return re.test(String(email).toLowerCase());
+    }
+
+    function trackEvent(eventName, properties = {}) {
+      if (typeof window !== 'undefined') {
+        // Placeholder for analytics event tracking, extendable
+        console.log(`Event tracked: ${eventName}`, properties);
+      }
+    }
+  </script>
+</body>
+</html>
